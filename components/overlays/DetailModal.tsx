@@ -33,12 +33,11 @@ const spring = {
 
 export function DetailModal({ artwork, onClose }: Props) {
   const { width } = useWindowDimensions()
+
+  const cardWidth = Math.min(width - 48, 360)
+  const imageHeight = (cardWidth - spacing.gutter * 2) * 0.75
   const progress = useSharedValue(0)
 
-  /**
-   * The card being displayed is held separately from `artwork` so the exit
-   * transition still has something to render after the parent clears selection.
-   */
   const [content, setContent] = useState<Artwork | null>(artwork)
   const hasContent = useRef(content !== null)
 
@@ -95,20 +94,24 @@ export function DetailModal({ artwork, onClose }: Props) {
         </Animated.View>
 
         <View style={styles.center} pointerEvents="box-none">
-          <Animated.View style={[styles.card, { width: Math.min(width - 48, 360) }, card]}>
+          <Animated.View style={[styles.card, { width: cardWidth }, card]}>
             <ScrollView
               bounces={false}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.content}
             >
-              <Text style={styles.title}>{content.title}</Text>
+              <Text style={styles.title} numberOfLines={2}>
+                {content.title}
+              </Text>
 
-              <Image
-                source={content.image}
-                style={[styles.image, { aspectRatio: content.width / content.height }]}
-                resizeMode="cover"
-                accessibilityIgnoresInvertColors
-              />
+              <View style={[styles.imageFrame, { height: imageHeight }]}>
+                <Image
+                  source={content.image}
+                  style={styles.image}
+                  resizeMode="contain"
+                  accessibilityIgnoresInvertColors
+                />
+              </View>
 
               <View style={styles.meta}>
                 <MetaRow label="Period" value={content.period} />
@@ -154,17 +157,24 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   content: {
-    paddingTop: 30,
-    paddingBottom: spacing.gutter,
+    paddingVertical: spacing.gutter,
     paddingHorizontal: spacing.gutter,
   },
   title: {
     ...type.modalTitle,
+    lineHeight: 26,
+    paddingRight: 28,
     marginBottom: 14,
+  },
+  imageFrame: {
+    width: '100%',
+    backgroundColor: '#1f2020',
+    borderRadius: 2,
+    overflow: 'hidden',
   },
   image: {
     width: '100%',
-    backgroundColor: '#1f2020',
+    height: '100%',
   },
   meta: {
     marginTop: 16,
@@ -173,10 +183,9 @@ const styles = StyleSheet.create({
   metaRow: {
     flexDirection: 'row',
     gap: 9,
-    ...type.label,
   },
   metaLabel: { ...type.label },
-  metaValue: { ...type.label, color: colors.textMuted },
+  metaValue: { ...type.label, color: colors.textMuted, flexShrink: 1 },
   description: {
     ...type.label,
     marginTop: 12,
