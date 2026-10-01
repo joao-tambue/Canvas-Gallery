@@ -56,9 +56,6 @@ export const canvas = {
   width: 2400,
   height: 1800,
   gridSize: 97.069,
-  /** Whole cells that fit inside the canvas, so no rule overhangs the edge. */
-  gridColumns: Math.floor(2400 / 97.069),
-  gridRows: Math.floor(1800 / 97.069),
 } as const
 
 export const type = {

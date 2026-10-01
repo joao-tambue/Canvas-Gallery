@@ -11,6 +11,7 @@ const BOX_H = 63
 interface Props {
   translateX: SharedValue<number>
   translateY: SharedValue<number>
+  zoom: SharedValue<number>
   viewport: { width: number; height: number }
 }
 
@@ -25,6 +26,7 @@ interface Props {
 export const Minimap = memo(function Minimap({
   translateX,
   translateY,
+  zoom,
   viewport,
 }: Props) {
   const scale = useMemo(
@@ -35,11 +37,16 @@ export const Minimap = memo(function Minimap({
   const innerW = canvas.width * scale
   const innerH = canvas.height * scale
 
-  const style = useAnimatedStyle(() => ({
+  const style = useAnimatedStyle(() => {
     // Viewport box travels opposite to the canvas.
-    left: -translateX.value * scale,
-    top: -translateY.value * scale,
-  }))
+    const z = zoom.value || 1
+    return {
+      left: (-translateX.value * scale) / z,
+      top: (-translateY.value * scale) / z,
+      width: Math.min((viewport.width * scale) / z, innerW),
+      height: Math.min((viewport.height * scale) / z, innerH),
+    }
+  })
 
   return (
     <View style={styles.root} pointerEvents="none">
@@ -49,13 +56,7 @@ export const Minimap = memo(function Minimap({
       <View style={styles.clip}>
         <View style={{ width: innerW, height: innerH }}>
           <View style={styles.viewportBox} />
-          <Animated.View
-            style={[
-              styles.window,
-              { width: Math.min(viewport.width * scale, innerW), height: Math.min(viewport.height * scale, innerH) },
-              style,
-            ]}
-          />
+          <Animated.View style={[styles.window, style]} />
         </View>
       </View>
     </View>

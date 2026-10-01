@@ -1,15 +1,16 @@
 import type { Artwork } from '@/types/artwork'
 
 export const CARD_PADDING = 8
+export const CARD_IMAGE_WIDTH = 320
+export const CARD_IMAGE_HEIGHT = 260
 
 /** Outer footprint of a card on the canvas. */
 export function cardBox(artwork: Artwork) {
   return {
     left: artwork.x,
     top: artwork.y,
-    width: artwork.width + CARD_PADDING * 2,
-    height:
-      artwork.height + CARD_PADDING * 2 + 8 + 12 + 10,
+    width: CARD_IMAGE_WIDTH + CARD_PADDING * 2,
+    height: CARD_IMAGE_HEIGHT + CARD_PADDING * 2 + 8 + 12 + 10,
   }
 }
 

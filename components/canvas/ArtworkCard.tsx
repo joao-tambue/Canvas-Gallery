@@ -1,16 +1,18 @@
-import { memo, useEffect } from 'react'
+import { memo } from 'react'
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import Animated, {
-  Easing,
   interpolate,
   useAnimatedStyle,
   useSharedValue,
-  withRepeat,
-  withSequence,
   withSpring,
   withTiming,
+  type SharedValue,
 } from 'react-native-reanimated'
-import { CARD_PADDING } from '@/lib/artwork'
+import {
+  CARD_IMAGE_HEIGHT,
+  CARD_IMAGE_WIDTH,
+  CARD_PADDING,
+} from '@/lib/artwork'
 import type { Artwork } from '@/types/artwork'
 import { colors, spacing, type } from '@/constants/theme'
 import { DotIcon } from '@/components/ui/Icons'
@@ -18,35 +20,28 @@ import { DotIcon } from '@/components/ui/Icons'
 interface Props {
   artwork: Artwork
   onPress: (artwork: Artwork) => void
+  blink: SharedValue<number>
 }
 
-export const ArtworkCard = memo(function ArtworkCard({ artwork, onPress }: Props) {
+export const ArtworkCard = memo(function ArtworkCard({
+  artwork,
+  onPress,
+  blink,
+}: Props) {
   const pressed = useSharedValue(0)
-  const dotOpacity = useSharedValue(1)
-
-  useEffect(() => {
-    dotOpacity.value = withRepeat(
-      withSequence(
-        withTiming(0.3, { duration: 1000, easing: Easing.inOut(Easing.quad) }),
-        withTiming(1, { duration: 1000, easing: Easing.inOut(Easing.quad) })
-      ),
-      -1,
-      false
-    )
-  }, [dotOpacity])
 
   const animated = useAnimatedStyle(() => ({
     // Touch has no hover, so the press compresses instead of lifting.
     transform: [{ scale: interpolate(pressed.value, [0, 1], [1, 0.965]) }],
   }))
 
-  const dotStyle = useAnimatedStyle(() => ({ opacity: dotOpacity.value }))
+  const dotStyle = useAnimatedStyle(() => ({ opacity: blink.value }))
 
   return (
     <Animated.View
       style={[
         styles.card,
-        { left: artwork.x, top: artwork.y, width: artwork.width + CARD_PADDING * 2 },
+        { left: artwork.x, top: artwork.y },
         animated,
       ]}
     >
@@ -64,10 +59,7 @@ export const ArtworkCard = memo(function ArtworkCard({ artwork, onPress }: Props
       >
         <Image
           source={artwork.image}
-          style={[
-            styles.image,
-            { aspectRatio: artwork.width / artwork.height },
-          ]}
+          style={styles.image}
           resizeMode="cover"
           accessibilityIgnoresInvertColors
         />
@@ -88,12 +80,14 @@ const styles = StyleSheet.create({
   card: {
     position: 'absolute',
     backgroundColor: colors.surface,
+    width: CARD_IMAGE_WIDTH + CARD_PADDING * 2,
     padding: spacing.cardPadding,
     borderRadius: 2,
     overflow: 'hidden',
   },
   image: {
-    width: '100%',
+    width: CARD_IMAGE_WIDTH,
+    height: CARD_IMAGE_HEIGHT,
     backgroundColor: '#1f2020',
   },
   footer: {

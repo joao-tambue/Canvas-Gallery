@@ -35,8 +35,9 @@ app/
 components/
   canvas/
     ArtworkCard.tsx          one work on the canvas
-    CanvasGrid.tsx           the construction grid, as a single SVG path
+    CanvasGrid.tsx           the construction grid, drawn across the whole screen
     Minimap.tsx              where-am-I indicator
+    ZoomPill.tsx             current zoom, tap to reset
   overlays/
     DetailModal.tsx          catalogue entry
     SearchSheet.tsx          search + jump-to-work
@@ -51,6 +52,21 @@ lib/artwork.ts               card size and geometry / search helpers
 types/artwork.ts             Artwork type
 assets/artworks/             the 12 artwork images
 ```
+
+## Gestures
+
+- **One finger** — pan around the canvas
+- **Pinch** — zoom from just past the point where the whole collection fits
+  the screen up to 250%, anchored on the point between your fingers so the
+  work you are zooming on stays under them
+- **Two-finger drag** — pan while zoomed in
+- **Tap the zoom pill** — snap back to 100% and the centred view
+
+The grid is drawn in screen space, so it fills the whole background at any
+zoom. The canvas can be dragged until one of its edges reaches the middle of
+the screen, so every corner of the collection can be reached. The minimap
+shows the whole 2400x1800 canvas and which part of it is on screen, with
+`MIN` on the pill when you are as far out as you can go.
 
 ## Notes on the port
 
