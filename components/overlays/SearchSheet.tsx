@@ -29,11 +29,6 @@ interface Props {
   onSelect: (artwork: Artwork) => void
 }
 
-/**
- * The search pill was non-functional on desktop. Search is a core affordance
- * on mobile, so it became a real sheet that filters the collection and can
- * pan the canvas to a result.
- */
 export function SearchSheet({ visible, artworks, onClose, onSelect }: Props) {
   const [query, setQuery] = useState('')
   const insets = useSafeAreaInsets()

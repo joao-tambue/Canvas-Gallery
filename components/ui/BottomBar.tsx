@@ -10,11 +10,6 @@ interface Props {
   onMenuPress: () => void
 }
 
-/**
- * The frosted bottom bar from the design. On desktop this was a decorative
- * pill with no behaviour; here both controls are real, which is why it is a
- * pair of Pressables rather than a static View.
- */
 export const BottomBar = memo(function BottomBar({
   onSearchPress,
   onMenuPress,

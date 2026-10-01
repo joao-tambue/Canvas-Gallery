@@ -31,7 +31,6 @@ export const ArtworkCard = memo(function ArtworkCard({
   const pressed = useSharedValue(0)
 
   const animated = useAnimatedStyle(() => ({
-    // Touch has no hover, so the press compresses instead of lifting.
     transform: [{ scale: interpolate(pressed.value, [0, 1], [1, 0.965]) }],
   }))
 

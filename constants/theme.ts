@@ -1,16 +1,9 @@
 import { Platform } from 'react-native'
 
-/**
- * Single source of truth for the Canvas Gallery design tokens.
- * Values are lifted from the original Figma Make export (Tailwind classes).
- */
-
 export const colors = {
   /** Canvas backdrop */
   stage: '#111111',
-  /** Accent, inherited from the frame that used to surround the viewport */
   accent: '#C4BAFF',
-  /** Card and modal surface */
   surface: '#2c2d2d',
   text: '#ffffff',
   textMuted: 'rgba(255, 255, 255, 0.6)',
@@ -21,10 +14,6 @@ export const colors = {
   gridLine: '#ffffff',
 } as const
 
-/**
- * The original design asked for Geist Mono, which is not bundled. JetBrains
- * Mono is the closest metric match available through Expo's Google Fonts.
- */
 export const fontFamily = {
   light: 'JetBrainsMono_300Light',
   regular: 'JetBrainsMono_400Regular',
@@ -48,10 +37,6 @@ export const spacing = {
   gutter: 20,
 } as const
 
-/**
- * Canvas geometry is preserved verbatim from the Figma frame so the spatial
- * composition of the collection is identical to the desktop design.
- */
 export const canvas = {
   width: 2400,
   height: 1800,
@@ -91,7 +76,6 @@ export const type = {
   },
 } as const
 
-/** `StyleSheet.absoluteFillObject`, spreadable inside a StyleSheet.create block. */
 export const absoluteFill = {
   position: 'absolute',
   top: 0,

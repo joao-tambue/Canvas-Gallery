@@ -8,7 +8,6 @@ interface IconProps {
   strokeWidth?: number
 }
 
-/** The 3-line hamburger from Frame2147241457. */
 export const MenuIcon = memo(function MenuIcon({
   size = 16,
   color = '#000000',
@@ -23,7 +22,6 @@ export const MenuIcon = memo(function MenuIcon({
   )
 })
 
-/** The diagonal cross from Group2147221304. */
 export const CloseIcon = memo(function CloseIcon({
   size = 10,
   color = colors.text,
@@ -68,10 +66,6 @@ export const ChevronRightIcon = memo(function ChevronRightIcon({
   )
 })
 
-/**
- * The blinking status dot beside each card title. Its opacity is animated by
- * the caller, so this stays a plain filled circle.
- */
 export const DotIcon = memo(function DotIcon({
   size = 6,
   color = colors.text,

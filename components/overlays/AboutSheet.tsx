@@ -63,7 +63,7 @@ export function AboutSheet({ visible, onClose }: Props) {
             <View style={styles.rule} />
 
             <Text style={styles.footnote}>
-              Artwork photography courtesy of Unsplash. Original interface designed
+              Artwork photography courtesy of Unsplash. Interface designed
               in Figma.
             </Text>
           </Animated.View>

@@ -15,14 +15,6 @@ interface Props {
   viewport: { width: number; height: number }
 }
 
-/**
- * Replaces the desktop x/y HUD.
- *
- * The old readout only made sense with a mouse; on a 2400x1800 canvas it is
- * far more useful to see *where you are* than a pair of raw numbers, so the
- * same corner slot now holds a miniature of the canvas with the visible
- * region highlighted.
- */
 export const Minimap = memo(function Minimap({
   translateX,
   translateY,
@@ -38,7 +30,6 @@ export const Minimap = memo(function Minimap({
   const innerH = canvas.height * scale
 
   const style = useAnimatedStyle(() => {
-    // Viewport box travels opposite to the canvas.
     const z = zoom.value || 1
     return {
       left: (-translateX.value * scale) / z,

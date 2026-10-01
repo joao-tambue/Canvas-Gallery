@@ -1,13 +1,5 @@
 import type { Artwork } from '@/types/artwork'
 
-/**
- * The collection, deduplicated. The web version of this app held two identical
- * copies of this array (Viewport.tsx and the unused Canvas.tsx); this file is
- * now the only one.
- *
- * Canvas coordinates are preserved from the Figma layout so the composition
- * looks the same as the desktop design.
- */
 export const artworks: Artwork[] = [
   {
     id: '1',
