@@ -25,24 +25,30 @@ npm run typecheck # tsc --noEmit
 
 ## Structure
 
+The app uses [Expo Router](https://docs.expo.dev/router/introduction/): every
+file in `app/` is a route. Imports use the `@/` alias for the project root.
+
 ```
-App.tsx                      font loading, providers, splash gate
-index.ts                     Expo entry point
-src/
-  screens/GalleryScreen.tsx  the pannable canvas and all screen chrome
-  components/
+app/
+  _layout.tsx                root layout: fonts, providers, splash gate
+  index.tsx                  the gallery: pannable canvas and screen chrome
+components/
+  canvas/
     ArtworkCard.tsx          one work on the canvas
     CanvasGrid.tsx           the construction grid, as a single SVG path
+    Minimap.tsx              where-am-I indicator
+  overlays/
     DetailModal.tsx          catalogue entry
     SearchSheet.tsx          search + jump-to-work
     AboutSheet.tsx           collection info
+  ui/
     BottomBar.tsx            frosted search / menu bar
-    Minimap.tsx              where-am-I indicator
     Wordmark.tsx             logo, as vector paths
     Icons.tsx                menu, close, search, chevron, dot
-  data/artworks.ts           the collection (single source of truth)
-  theme.ts                   colours, type, canvas geometry
-  types.ts                   Artwork type and geometry helpers
+constants/theme.ts           colours, type, canvas geometry
+data/artworks.ts             the collection (single source of truth)
+lib/artwork.ts               card size and geometry / search helpers
+types/artwork.ts             Artwork type
 assets/artworks/             the 12 artwork images
 ```
 

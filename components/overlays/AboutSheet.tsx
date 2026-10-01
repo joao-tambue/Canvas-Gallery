@@ -7,8 +7,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { artworks } from '../data/artworks'
-import { colors, radius, spacing, type } from '../theme'
+import { artworks } from '@/data/artworks'
+import { colors, radius, spacing, type } from '@/constants/theme'
 
 interface Props {
   visible: boolean

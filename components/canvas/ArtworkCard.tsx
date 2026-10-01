@@ -10,9 +10,10 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated'
-import { CARD_PADDING, type Artwork } from '../types'
-import { colors, spacing, type } from '../theme'
-import { DotIcon } from './Icons'
+import { CARD_PADDING } from '@/lib/artwork'
+import type { Artwork } from '@/types/artwork'
+import { colors, spacing, type } from '@/constants/theme'
+import { DotIcon } from '@/components/ui/Icons'
 
 interface Props {
   artwork: Artwork

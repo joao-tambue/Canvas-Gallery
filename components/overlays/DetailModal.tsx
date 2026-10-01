@@ -17,9 +17,9 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
-import type { Artwork } from '../types'
-import { colors, radius, spacing, type } from '../theme'
-import { CloseIcon } from './Icons'
+import type { Artwork } from '@/types/artwork'
+import { colors, radius, spacing, type } from '@/constants/theme'
+import { CloseIcon } from '@/components/ui/Icons'
 
 interface Props {
   artwork: Artwork | null

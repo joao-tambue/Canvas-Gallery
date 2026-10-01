@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import Svg, { Circle, Line, Path, Polyline } from 'react-native-svg'
-import { colors } from '../theme'
+import { colors } from '@/constants/theme'
 
 interface IconProps {
   size?: number

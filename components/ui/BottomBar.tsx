@@ -2,8 +2,8 @@ import { memo } from 'react'
 import type { ReactNode } from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { BlurView } from 'expo-blur'
-import { absoluteFill, colors, radius, spacing, type } from '../theme'
-import { MenuIcon, SearchIcon } from './Icons'
+import { absoluteFill, colors, radius, spacing, type } from '@/constants/theme'
+import { MenuIcon, SearchIcon } from '@/components/ui/Icons'
 
 interface Props {
   onSearchPress: () => void

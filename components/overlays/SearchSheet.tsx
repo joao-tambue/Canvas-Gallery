@@ -17,10 +17,10 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import type { Artwork } from '../types'
-import { matches } from '../types'
-import { colors, radius, spacing, type } from '../theme'
-import { ChevronRightIcon, SearchIcon } from './Icons'
+import type { Artwork } from '@/types/artwork'
+import { matches } from '@/lib/artwork'
+import { colors, radius, spacing, type } from '@/constants/theme'
+import { ChevronRightIcon, SearchIcon } from '@/components/ui/Icons'
 
 interface Props {
   visible: boolean

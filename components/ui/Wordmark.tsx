@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import Svg, { Path } from 'react-native-svg'
-import { colors } from '../theme'
+import { colors } from '@/constants/theme'
 
 /**
  * Path data lifted verbatim from the Figma export

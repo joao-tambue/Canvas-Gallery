@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import Animated, { useAnimatedStyle } from 'react-native-reanimated'
 import type { SharedValue } from 'react-native-reanimated'
 import { BlurView } from 'expo-blur'
-import { absoluteFill, canvas, colors } from '../theme'
+import { absoluteFill, canvas, colors } from '@/constants/theme'
 
 const BOX_W = 84
 const BOX_H = 63

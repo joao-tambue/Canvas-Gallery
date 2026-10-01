@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react'
 import { View, StyleSheet } from 'react-native'
 import Svg, { Path } from 'react-native-svg'
-import { canvas, colors } from '../theme'
+import { canvas, colors } from '@/constants/theme'
 
 /**
  * The 10%-opacity construction grid from the original design.

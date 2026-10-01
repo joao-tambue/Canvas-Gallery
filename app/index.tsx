@@ -9,21 +9,22 @@ import Animated, {
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import * as Haptics from 'expo-haptics'
-import { artworks } from '../data/artworks'
-import { cardCenter, type Artwork } from '../types'
-import { absoluteFill, canvas, colors } from '../theme'
-import { ArtworkCard } from '../components/ArtworkCard'
-import { AboutSheet } from '../components/AboutSheet'
-import { BottomBar } from '../components/BottomBar'
-import { CanvasGrid } from '../components/CanvasGrid'
-import { DetailModal } from '../components/DetailModal'
-import { Minimap } from '../components/Minimap'
-import { SearchSheet } from '../components/SearchSheet'
-import { Wordmark } from '../components/Wordmark'
+import { artworks } from '@/data/artworks'
+import { cardCenter } from '@/lib/artwork'
+import type { Artwork } from '@/types/artwork'
+import { absoluteFill, canvas, colors } from '@/constants/theme'
+import { ArtworkCard } from '@/components/canvas/ArtworkCard'
+import { AboutSheet } from '@/components/overlays/AboutSheet'
+import { BottomBar } from '@/components/ui/BottomBar'
+import { CanvasGrid } from '@/components/canvas/CanvasGrid'
+import { DetailModal } from '@/components/overlays/DetailModal'
+import { Minimap } from '@/components/canvas/Minimap'
+import { SearchSheet } from '@/components/overlays/SearchSheet'
+import { Wordmark } from '@/components/ui/Wordmark'
 
 const SPRING = { damping: 26, stiffness: 180, mass: 0.7 }
 
-export function GalleryScreen() {
+export default function GalleryScreen() {
   const { width, height } = useWindowDimensions()
   const insets = useSafeAreaInsets()
 
