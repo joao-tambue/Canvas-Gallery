@@ -24,7 +24,6 @@ import { AboutSheet } from '@/components/overlays/AboutSheet'
 import { DetailModal } from '@/components/overlays/DetailModal'
 import { SearchSheet } from '@/components/overlays/SearchSheet'
 import { BottomBar } from '@/components/ui/BottomBar'
-import { Wordmark } from '@/components/ui/Wordmark'
 import { absoluteFill, canvas, colors } from '@/constants/theme'
 import { artworks } from '@/data/artworks'
 import { cardCenter } from '@/lib/artwork'
@@ -260,12 +259,7 @@ export default function GalleryScreen() {
       </GestureDetector>
 
       <View style={styles.chrome} pointerEvents="box-none">
-        <View></View>
-        <View style={[styles.header, { paddingTop: insets.top + 12 }]} pointerEvents="none">
-          <Wordmark width={133} />
-        </View>
-
-        <View style={styles.footer} pointerEvents="box-none">
+        <View style={[styles.header, { paddingTop: insets.top + 12 }]} pointerEvents="box-none">
           <Minimap
             translateX={canvasMotion.tx}
             translateY={canvasMotion.ty}
@@ -308,15 +302,13 @@ const styles = StyleSheet.create({
     top: 0,
     transformOrigin: 'left top',
   },
-  chrome: { ...absoluteFill },
-  header: { alignItems: 'center' },
-  footer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
+  chrome: { ...absoluteFill, justifyContent: 'space-between' },
+  header: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
     gap: 8,
-    padding: 16,
+    paddingHorizontal: 16,
   },
   barSlot: { paddingHorizontal: 0 },
 })
