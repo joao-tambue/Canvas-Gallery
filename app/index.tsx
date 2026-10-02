@@ -18,6 +18,7 @@ import * as Haptics from 'expo-haptics'
 import { ArtworkCard } from '@/components/canvas/ArtworkCard'
 import { CanvasGrid } from '@/components/canvas/CanvasGrid'
 import { Minimap } from '@/components/canvas/Minimap'
+import { ZoomButton } from '@/components/canvas/ZoomButton'
 import { ZoomPill } from '@/components/canvas/ZoomPill'
 import { AboutSheet } from '@/components/overlays/AboutSheet'
 import { DetailModal } from '@/components/overlays/DetailModal'
@@ -32,6 +33,7 @@ import type { Artwork } from '@/types/artwork'
 const SPRING = { damping: 26, stiffness: 180, mass: 0.7 }
 
 const MAX_ZOOM = 2.5
+const ZOOM_STEP = 1.25
 const OVERSCROLL = 0.5
 
 const FIT_MARGIN = 0.85
@@ -183,8 +185,31 @@ export default function GalleryScreen() {
     ty.value = withSpring((height - canvas.height) / 2, SPRING)
   }, [height, tx, ty, width, zoom])
 
+  /** Zoom by one step, keeping the centre of the screen fixed. */
+  const stepZoom = useCallback(
+    (factor: number) => {
+      const s = zoom.value
+      const next = Math.min(MAX_ZOOM, Math.max(minZoom, s * factor))
+      const centreX = (width / 2 - tx.value) / s
+      const centreY = (height / 2 - ty.value) / s
+      zoom.value = withSpring(next, SPRING)
+      tx.value = withSpring(
+        clampAxis(width / 2 - centreX * next, canvas.width * next, width),
+        SPRING
+      )
+      ty.value = withSpring(
+        clampAxis(height / 2 - centreY * next, canvas.height * next, height),
+        SPRING
+      )
+    },
+    [height, minZoom, tx, ty, width, zoom]
+  )
+  const zoomIn = useCallback(() => stepZoom(ZOOM_STEP), [stepZoom])
+  const zoomOut = useCallback(() => stepZoom(1 / ZOOM_STEP), [stepZoom])
+
   /** True when zoomed all the way out to the full collection. */
   const atMinZoom = zoomPct === Math.round(minZoom * 100)
+  const atMaxZoom = zoomPct === Math.round(MAX_ZOOM * 100)
 
   const canvasMotion = useMemo(() => ({ tx, ty, zoom }), [tx, ty, zoom])
 
@@ -235,6 +260,7 @@ export default function GalleryScreen() {
       </GestureDetector>
 
       <View style={styles.chrome} pointerEvents="box-none">
+        <View></View>
         <View style={[styles.header, { paddingTop: insets.top + 12 }]} pointerEvents="none">
           <Wordmark width={133} />
         </View>
@@ -246,7 +272,9 @@ export default function GalleryScreen() {
             zoom={canvasMotion.zoom}
             viewport={{ width, height }}
           />
+          <ZoomButton direction="out" disabled={atMinZoom} onPress={zoomOut} />
           <ZoomPill value={zoomPct} atMin={atMinZoom} onReset={resetZoom} />
+          <ZoomButton direction="in" disabled={atMaxZoom} onPress={zoomIn} />
         </View>
 
         <View style={[styles.barSlot, { paddingBottom: insets.bottom + 16 }]} pointerEvents="box-none">

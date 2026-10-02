@@ -66,6 +66,31 @@ export const ChevronRightIcon = memo(function ChevronRightIcon({
   )
 })
 
+export const PlusIcon = memo(function PlusIcon({
+  size = 10,
+  color = colors.text,
+  strokeWidth = 1.2,
+}: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 10 10" fill="none">
+      <Line x1={5} y1={0.5} x2={5} y2={9.5} stroke={color} strokeWidth={strokeWidth} />
+      <Line x1={0.5} y1={5} x2={9.5} y2={5} stroke={color} strokeWidth={strokeWidth} />
+    </Svg>
+  )
+})
+
+export const MinusIcon = memo(function MinusIcon({
+  size = 10,
+  color = colors.text,
+  strokeWidth = 1.2,
+}: IconProps) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 10 10" fill="none">
+      <Line x1={0.5} y1={5} x2={9.5} y2={5} stroke={color} strokeWidth={strokeWidth} />
+    </Svg>
+  )
+})
+
 export const DotIcon = memo(function DotIcon({
   size = 6,
   color = colors.text,
